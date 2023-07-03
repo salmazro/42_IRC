@@ -6,7 +6,7 @@
 /*   By: salmazro <salmazro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:47:22 by salmazro          #+#    #+#             */
-/*   Updated: 2023/06/24 22:43:03 by salmazro         ###   ########.fr       */
+/*   Updated: 2023/07/03 21:49:48 by salmazro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Channel
 	public:
 
 	// Constructor && Destructor
-	Channel(std::string name, std::string password);
+	Channel(std::string name, std::string pwd);
 	~Channel(void);
 
 	// Getter
@@ -38,7 +38,7 @@ class Channel
 	//std::vector<User *> getUserName(void); :lets check later
 
 	//Methods
-	//User *getUserByNick(std::string nick); :lets check later
+	//User *getUserNickname(std::string nick); :lets check later
 	//void addUser(User *user); :wait for alhai part
 	//void removeUser(User *user); :wait for alhai part
 	void messageFromChannel(std::string msg);
