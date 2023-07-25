@@ -1,15 +1,17 @@
-NAME	=	ircserv
-COMPILER=	c++ 
-FLAGS	=	-std=c++98 -Wall -Wextra -Werror
-SRC		=	main.cpp Server/Utils.cpp Server/Server.cpp Channels/Channel.cpp \
-			 Channels/Channel_utils.cpp Server/user.cpp
-OBJ		=	$(SRC:.cpp=.o)
-INC		=	
+NAME     = ircserv
+COMPILER = c++
+FLAGS    = -std=c++98 -Wall -Wextra -Werror
+SRC      = main.cpp Server/Utils.cpp Server/Server.cpp Channels/Channel.cpp \
+           Channels/Channel_utils.cpp Server/user.cpp Server/sockets.cpp \
+           Server/messages.cpp
 
+OBJ      = $(SRC:.cpp=.o)
+INC      =
 
-DEFAULT	=	'\033[0m'
-GREEN	=	'\033[1;32m'
-ORANGE 	=	'\033[1;33m'
+DEFAULT  = '\033[0m'
+GREEN    = '\033[1;32m'
+ORANGE   = '\033[1;33m'
+GHOST   = '👻'
 
 .PHONY: all clean fclean re
 
@@ -25,10 +27,12 @@ rm_irssi:
 	@docker rm -f my-running-irssi 2> /dev/null || exit 0
 
 %.o: %.cpp $(INC)
-	$(COMPILER) $(FLAGS) -o $@ -c $<
+	@$(COMPILER) $(FLAGS) -o $@ -c $<
+	@printf "\033[1K\rCompiling $<"
 
 $(NAME): $(OBJ)
 	@$(COMPILER) $(FLAGS) $(OBJ) -o $(NAME)
+	@printf "\033[1K\r$(GREEN)$(GHOST) Ft_IRC is ready! $(GHOST)$(DEFAULT)\n"
 
 clean:
 	@rm -f $(OBJ)
@@ -39,21 +43,20 @@ clean:
 	@rm -rf *.dSYM
 	@rm -rf */*.dSYM
 	@find . -name ".DS_Store" -type f -delete
-	@echo ${ORANGE}"Cleaning up refuse"$(DEFAULT)
+	@printf "$(ORANGE)Cleaning up refuse $(DEFAULT)"
+	@printf "\n"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo ${GREEN}"All Clean"$(DEFAULT)
+	@printf "$(GREEN)All clean! $(DEFAULT)\n"
 
 re: fclean all
 
-
 compiling:
-	@echo $(ORANGE)"Ft_IRC is being compiled"$(DEFAULT)
+	@printf "$(ORANGE)Ft_IRC is being compiled... $(DEFAULT)"
 
 compiled:
-	@echo $(GREEN)"Ft_IRC is ready"$(DEFAULT)
+	@printf "$(GREEN)Ft_IRC is ready! $(DEFAULT)\n"
 	@printf "\n"
-	@printf "   🌼\033[1;97m I R C S E R V  C R E A T E D  W I T H  S U C C E S S 🌼\e[0m\n"
+	@printf "                👻👻👻\033[1;97m THE SPOOKY IRC SERVER CREATED SUCCESSFULLY 👻👻👻\033[0m\n"
 	@printf "\n"
-

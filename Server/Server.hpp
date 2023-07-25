@@ -8,6 +8,7 @@
 #define YELLOW		"\033[0;33m"
 
 #include <iostream>
+#include <iomanip>
 #include <stdexcept>
 #include <cstring>
 #include <sys/types.h>
@@ -52,11 +53,11 @@ namespace irc {
             int                         _status;
             int                         _sockfd;
             bool                        _running;
-            
+
             void    initPollFD(int fd);
 
             Server();
-			
+
         public:
             Server  ( const std::string& host, const int& port, const std::string& password );
             ~Server ();
@@ -76,7 +77,7 @@ namespace irc {
 
             void    handleSignal(int signal);
             static void signalHandler(int signal);
-            
+
             //user
             std::vector<User *> _users;
             std::vector<User *>& getUser( void );
@@ -95,7 +96,7 @@ namespace irc {
             // std::string find(std::string, )
 
             bool verifyPassword(std::string userPassword);
-			
+
 			// Channels
 			Channel *createChannel(std::string name, std::string password);
 			Channel *getChannel(std::string name);

@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[])
 {
-	irc::Server* server = nullptr; // Pointer to an instance of the IRC server
+	irc::Server* server = NULL; // Pointer to an instance of the IRC server
 
 	try
 	{
